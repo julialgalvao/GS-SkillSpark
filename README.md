@@ -1,21 +1,17 @@
 # SkillSpark
 
-Aplicativo desenvolvido para a Global Solution 2025.2 -- Engenharia de
-Software (3ESA / 3ESR), na disciplina Mobile Development & IoT.
+Aplicativo desenvolvido para a Global Solution 2025.2 -- Engenharia de Software 3ESA, na disciplina Mobile Development & IoT.
 
-O SkillSpark é um aplicativo criado para ajudar estudantes e
-profissionais a mapear, organizar e acompanhar suas habilidades
-(skills), alinhadas às exigências do Futuro do Trabalho. Ele incentiva o
-desenvolvimento contínuo e permite que o usuário registre tanto hard
-skills quanto soft skills, seus níveis, prioridades e até links úteis
+O SkillSpark é um aplicativo criado para ajudar estudantes e profissionais a mapear, organizar e acompanhar suas habilidades (skills), alinhadas às exigências do Futuro do Trabalho.
+Ele incentiva o desenvolvimento contínuo e permite que o usuário registre tanto hard skills quanto soft skills, seus níveis, prioridades e até links úteis para estudo.
 para estudo.
 
 ## 👥 Integrantes
 
-  Nome                        RM
-  --------------------------- --------
-  Aline Fernandes Zeppelini   97966
-  Julia Leite Galvão          550201
+Nome | RM
+--- | ---
+Aline Fernandes Zeppelini | 97966
+Julia Leite Galvão | 550201
 
 ## 📘 Introdução
 
@@ -117,17 +113,46 @@ Para conferir se instalou corretamente:
 
 ### 📥 2. Baixar o projeto
 
-    git clone https://github.com/SEU-USUARIO/SkillSpark.git
+    git clone https://github.com/julialgalvao/GS-SkillSpark.git
     cd SkillSpark
 
 ### 📦 3. Instalar as dependências
 
-    npm install
+```
+npm install
+```
 
 ### ▶️ 4. Rodar o aplicativo
 
-    npm start
+```
+npm start
+```
 
+O Expo abrirá um painel no navegador.
+
+Agora você tem 3 opções para visualizar o app:
+
+### A) Rodar no celular físico (recomendado)
+- Instale **Expo Go**
+- Abra o aplicativo
+- Scaneie o QR Code gerado pelo Expo
+
+### B) Rodar no navegador (web)
+
+Aperte:
+
+```
+w
+```
+
+### C) Rodar em um emulador Android
+- Instale **Android Studio**
+- Crie um dispositivo virtual (Pixel 5, API 34)
+- No terminal aperte:
+
+```
+a
+```
 ### 📁 Estrutura do Projeto
 
     SkillSpark/
@@ -145,4 +170,24 @@ Para conferir se instalou corretamente:
     │── App.js
     │── package.json
     │── README.md
+
+
+## 🌟 O que fizemos no projeto
+
+✔️ Aplicamos o tema Futuro do Trabalho, com conteúdos sobre IA, automação, soft skills, aprendizado contínuo e tendências modernas.
+
+✔️ Criamos um app completo e funcional, com cadastro, listagem e remoção de skills.
+
+✔️ Adicionamos recursos extras:
+
+- Prioridade da skill  
+- Link útil para o futuro  
+- Resumo inteligente  
+- Tela Explore personalizada  
+- Interface moderna em tema escuro  
+
+✔️ Estrutura limpa e organizada, separando componentes e lógica de armazenamento.
+
+✔️ Persistência local real:  
+Todas as skills continuam mesmo após fechar e abrir o aplicativo.
 
