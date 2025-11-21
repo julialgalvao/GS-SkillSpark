@@ -1,33 +1,91 @@
 import React from 'react';
-import { View, Text, FlatList, Button, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function SkillList({ skills, onRemoveSkill }) {
+  function handleOpenLink(resource) {
+    if (!resource) return;
+
+    let url = resource.trim();
+
+    // se a pessoa não colocou http, adiciona
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      url = 'https://' + url;
+    }
+
+    Linking.openURL(url).catch(() => {
+      // se der erro, só ignora (pra não quebrar o app)
+    });
+  }
+
   function renderItem({ item }) {
     return (
       <View style={styles.item}>
-        <View style={styles.itemTextContainer}>
-          <Text style={styles.itemName}>{item.name}</Text>
-          <Text style={styles.itemDetail}>Categoria: {item.category}</Text>
-          <Text style={styles.itemDetail}>Nível: {item.level}</Text>
+        <View style={styles.itemLeft}>
+          <View style={styles.avatar}>
+            <Text style={styles.avatarText}>
+              {item.name?.charAt(0).toUpperCase()}
+            </Text>
+          </View>
+          <View style={styles.textBlock}>
+            <Text style={styles.itemName}>{item.name}</Text>
+            <Text style={styles.itemMeta}>
+              {item.category} · {item.level}
+            </Text>
+
+            {item.priority && (
+              <Text style={styles.itemMetaSecondary}>
+                Prioridade: {item.priority}
+              </Text>
+            )}
+
+            {item.resource && (
+              <TouchableOpacity
+                onPress={() => handleOpenLink(item.resource)}
+              >
+                <Text
+                  style={styles.linkText}
+                  numberOfLines={1}
+                >
+                  <Ionicons name="link-outline" size={12} /> {item.resource}
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
-        <Button title="Remover" onPress={() => onRemoveSkill(item.id)} />
+
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={() => onRemoveSkill(item.id)}
+        >
+          <Ionicons name="trash-outline" size={18} color="#FCA5A5" />
+        </TouchableOpacity>
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Minhas skills para o Futuro do Trabalho</Text>
+      <Text style={styles.title}>Suas skills para o futuro</Text>
 
       {skills.length === 0 ? (
         <Text style={styles.emptyText}>
-          Nenhuma skill cadastrada ainda. Comece adicionando uma!
+          Nenhuma skill cadastrada ainda. Comece adicionando algo que você quer
+          desenvolver para o futuro do trabalho 🚀
         </Text>
       ) : (
         <FlatList
           data={skills}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
+          scrollEnabled={false}
         />
       )}
     </View>
@@ -36,36 +94,72 @@ export default function SkillList({ skills, onRemoveSkill }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginTop: 8,
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 12,
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#E5E7EB',
+    marginBottom: 10,
   },
   emptyText: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 13,
+    color: '#9CA3AF',
   },
   item: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 12,
+    backgroundColor: '#020617',
+    borderRadius: 16,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
     marginBottom: 8,
-    borderRadius: 8,
-    backgroundColor: '#e6f0ff',
+    borderWidth: 1,
+    borderColor: '#1F2937',
+    justifyContent: 'space-between',
   },
-  itemTextContainer: {
+  itemLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
     flex: 1,
-    marginRight: 8,
+  },
+  avatar: {
+    width: 34,
+    height: 34,
+    borderRadius: 999,
+    backgroundColor: '#1E293B',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatarText: {
+    color: '#F9FAFB',
+    fontWeight: '700',
+  },
+  textBlock: {
+    flex: 1,
   },
   itemName: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#F9FAFB',
   },
-  itemDetail: {
-    fontSize: 13,
-    color: '#333',
+  itemMeta: {
+    fontSize: 12,
+    color: '#9CA3AF',
+    marginTop: 2,
+  },
+  itemMetaSecondary: {
+    fontSize: 11,
+    color: '#E5E7EB',
+    marginTop: 2,
+  },
+  linkText: {
+    fontSize: 11,
+    color: '#60A5FA',
+    marginTop: 4,
+  },
+  deleteButton: {
+    padding: 6,
   },
 });
